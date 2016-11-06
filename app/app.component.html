@@ -1,0 +1,22 @@
+<h1>Prosoft - Programming excercise</h1>
+
+<div>
+    <div>
+        <label>Start Date: </label>
+        <input [(ngModel)]="formData.startDate" placeholder="8/15/208">
+    </div>
+    <div>
+        <label>Number of days:</label>
+        <input [(ngModel)]="formData.numberDays" placeholder="17">
+    </div>
+    <div><label>Country code</label>
+        <input [(ngModel)]="formData.countryCode" placeholder="US">
+    </div>
+    <div>
+        <button (click)="showHolidays()">Show Holidays</button>
+    </div>
+</div>
+<br>
+<app-calendar>
+
+</app-calendar>
