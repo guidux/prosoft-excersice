@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
-import {start} from "repl";
 import {Utils} from "./shared/utils";
+import {Holiday} from "./models/holiday";
+import {HolidayService} from "./services/holiday.service";
 @Component({
     selector: 'my-app',
-    templateUrl: 'app/app.component.html'
+    templateUrl: 'app/app.component.html',
+    providers: [HolidayService, Utils]
 })
 export class AppComponent {
-
-    constructor(private appUtils: Utils) { }
+    public holidays: Holiday [];
+    constructor(private appUtils: Utils, private holidayService: HolidayService) { }
     public formData: any = {
         startDate: "",
         numberDays: "",
@@ -25,6 +27,16 @@ export class AppComponent {
         console.log("startDate = " + startDate);
         console.log("numberDays = " + numberDays);
         console.log("countryCode = " + countryCode);
+
+
+        let holidayObservable = this.holidayService.getHolidays(new Date(), 20, "US"); // only for testing purposes
+
+        holidayObservable.then((holidays : Holiday[]) =>{
+            console.log("Holiday count = " + holidays.length);
+        }, error => {
+           console.log("Error message= " + error);
+        });
+
     }
 
     validForm(formData): any {
